@@ -9,7 +9,8 @@ El lenguaje utilizado para estas pruebas sera PHP ya que el sitio que deseamos a
   
   `OrangeHRM opensource-demo:` https://opensource-demo.orangehrmlive.com/index.php/auth/validateCredentials
 
-## Prerequisito: 
+## Prerequisitos: 
+Tener el JDK de Java instalado: https://www.oracle.com/java/technologies/downloads/ 
 Tener un servidor local para correr archivos PHP, por ejemplo XAMPP o WAMPP.
 Google Chrome es el navegador elejido para estas pruebas.
   
