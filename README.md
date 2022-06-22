@@ -2,7 +2,7 @@
 
 Los pasos necesarios para poder correr nuestras pruebas automatizadas constan de 7 acciones y un solo requisito obligatorio.
 
-El lenguaje utilizado para estas pruebas sera PHP ya que el sitio que deseamos analizar esta escrito en este mismo lenguaje.
+El lenguaje utilizado para estas pruebas sera PHP, ya que el sitio que deseamos analizar esta escrito en este mismo lenguaje.
 
 	
   `GitHub oficial de php-webdriver:`  https://github.com/php-webdriver/php-webdrive
