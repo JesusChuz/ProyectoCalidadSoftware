@@ -10,15 +10,6 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 //Usamos vendor para el PHP
 require_once('vendor/autoload.php');
 
-//Definimos el host de selenium
-//$host = 'http://localhost:4444/';
-
-//Entramos en chrome
-//$capabilities = DesiredCapabilities::chrome();
-
-// Se empieza a auto controlar la página
-//$driver = RemoteWebDriver::create($host, $capabilities);
-
 function executeTestCase($caps) {
     $driver = RemoteWebDriver::create(
         "https://j.mendezquesada18:Iw9Aet4iSCG9OnI4MN4pKO5YSHrBCwCnGXiJY9has28VXmzJWq@hub.lambdatest.com/wd/hub",
@@ -27,8 +18,7 @@ function executeTestCase($caps) {
 
 $driver->manage()->window()->maximize();
 
-// entramos a la pagina donde vamos hacer las pruebas en OrangeHRM
-// open | https://opensource-demo.orangehrmlive.com/index.php/leave/viewHolidayList | 
+    // entramos a la pagina donde vamos hacer las pruebas en OrangeHRM
 $driver->get("https://opensource-demo.orangehrmlive.com/index.php/leave/viewHolidayList");
 // click | id=txtUsername | 
 $driver->findElement(WebDriverBy::id("txtUsername"))->click();
@@ -72,7 +62,6 @@ $driver->findElement(WebDriverBy::id("btnDelete"))->click();
 // click | id=dialogDeleteBtn | 
 $driver->findElement(WebDriverBy::id("dialogDeleteBtn"))->click();
 
-// terminate the session and close the browser
 $driver->quit();
 
 }
