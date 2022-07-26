@@ -76,3 +76,4 @@ print_r($cookies);
 
 // terminate the session and close the browser
 $driver->quit();
+?>
