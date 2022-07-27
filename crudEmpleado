@@ -10,14 +10,21 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 //Usamos vendor para el PHP
 require_once('vendor/autoload.php');
 
-//Definimos el host de selenium
-$host = 'http://localhost:4444/';
+//Definimos el host de selenium si queremos que el test sea local
+//$host = 'http://localhost:4444/';
 
 //Entramos en chrome
-$capabilities = DesiredCapabilities::chrome();
+//$capabilities = DesiredCapabilities::chrome();
 
 // Se empieza a auto controlar la página
-$driver = RemoteWebDriver::create($host, $capabilities);
+//$driver = RemoteWebDriver::create($host, $capabilities);
+//Definimimos lo siguiente si deseamos que el test corra en la nube
+function executeTestCase($caps) {
+    $driver = RemoteWebDriver::create(
+        "https://j.mendezquesada18:Iw9Aet4iSCG9OnI4MN4pKO5YSHrBCwCnGXiJY9has28VXmzJWq@hub.lambdatest.com/wd/hub",
+        $caps
+  );
+
 $driver->manage()->window()->maximize();
 
 //--------------------------------------Ingresar a la página Web--------------------------------------------------------------
@@ -27,8 +34,6 @@ $driver->manage()->window()->maximize();
 		WebDriverExpectedCondition::urlContains('https://opensource-demo.orangehrmlive.com/index.php/auth/login'));
 	// Imprime el URL
 	echo "La URL es: '" . $driver->getCurrentURL(). "'<br>";
-	// click | xpath=(.//*[normalize-space(text()) and normalize-space(.)='LOGIN Panel'])[1]/following::span[1] | 
-	$driver->findElement(WebDriverBy::xpath("(.//*[normalize-space(text()) and normalize-space(.)='LOGIN Panel'])[1]/following::span[1]"))->click();
 
 	// type | id=txtUsername | Admin
 	$driver->findElement(WebDriverBy::id("txtUsername"))->sendKeys("Admin");
@@ -70,5 +75,19 @@ $driver->manage()->window()->maximize();
 
 	// terminate the session and close the browser
 	$driver->quit();
+}
 
+$caps = array(
+    array(
+        "platform" => "Windows 10",
+        "browserName" => "Chrome",
+        "version" => "103.0",
+        "resolution" => "1920x1080",
+        "build" => "Build agregar empleados",
+        "name" => "Test insertar empleado"
+    )
+  );
+foreach ( $caps as $cap ) {
+    executeTestCase($cap);
+}
 ?>
