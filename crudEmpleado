@@ -112,6 +112,11 @@ $driver->manage()->window()->maximize();
 	$driver->findElement(WebDriverBy::id("personal_DOB"))->sendKeys("2000-04-25");
 	// click | id del boton salvar
 	$driver->findElement(WebDriverBy::id("btnSave"))->click();
+	$driver->findElement(WebDriverBy::id("empsearch_id"))->sendKeys("7777");
+	// click | id del boton buscar empleado
+	$driver->findElement(WebDriverBy::id("searchBtn"))->click();
+	//click en el primer resultado de la busqueda por medio de xpath
+	$driver->findElement(WebDriverBy::xpath("//table/tbody/tr[1]/td[2]"))->click();
 	echo "La URL es: '" . $driver->getCurrentURL(). "'<br>";
 	time_nanosleep(3, 3000000000);
 	
@@ -139,6 +144,8 @@ $driver->manage()->window()->maximize();
 	$driver->findElement(WebDriverBy::id("btnDelete"))->click();
 	// se confirma y listo
 	$driver->findElement(WebDriverBy::id("dialogDeleteBtn"))->click();
+	// type | Id del empleado | 7777
+	$driver->findElement(WebDriverBy::id("empsearch_id"))->sendKeys("7777");
 	
 	
 	time_nanosleep(3, 3000000000);
