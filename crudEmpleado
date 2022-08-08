@@ -26,6 +26,7 @@ $driver->manage()->window()->maximize();
 	$driver->wait()->until(
 		WebDriverExpectedCondition::urlContains('https://opensource-demo.orangehrmlive.com/index.php/auth/login'));
 	// Imprime el URL
+	echo "Este es el camino de las pruebas del CRUD de empleado <br>";
 	echo "La URL es: '" . $driver->getCurrentURL(). "'<br>";
 	// click | xpath=(.//*[normalize-space(text()) and normalize-space(.)='LOGIN Panel'])[1]/following::span[1] | 
 	$driver->findElement(WebDriverBy::xpath("(.//*[normalize-space(text()) and normalize-space(.)='LOGIN Panel'])[1]/following::span[1]"))->click();
@@ -38,8 +39,10 @@ $driver->manage()->window()->maximize();
 	$user = $driver->findElement(WebDriverBy::id("txtPassword"))->sendKeys("admin123");
 	// click | id=btnLogin | 
 	$driver->findElement(WebDriverBy::id("btnLogin"))->click();
-	//echo $user;
+	time_nanosleep(3, 3000000000);
+	
 //--------------------------------------Agregar un Usuario--------------------------------------------------------------
+	echo "<br> Este es el camino de las pruebas de agregar empleado <br>";
 	// click | id del boton PIM
 	$driver->findElement(WebDriverBy::id("menu_pim_viewPimModule"))->click();
 	// click | id del boton Lista de empleados, Para ver la lista de empleados actuales
@@ -63,8 +66,10 @@ $driver->manage()->window()->maximize();
 	// click | id=btnSave | Para salvar
 	$driver->findElement(WebDriverBy::id("btnSave"))->click();
 	echo "La URL es: '" . $driver->getCurrentURL(). "'<br>";
+	time_nanosleep(3, 3000000000);
 	
 //--------------------------------------Leer un Usuario--------------------------------------------------------------	
+	echo "<br>Este es el camino de las pruebas de leer un empleado <br>";
 	// click | id del boton lista de empleados
 	$driver->findElement(WebDriverBy::id("menu_pim_viewEmployeeList"))->click();
 	//Esperamos hasta confirmar la url
@@ -80,14 +85,64 @@ $driver->manage()->window()->maximize();
 	$driver->findElement(WebDriverBy::id("empsearch_id"))->sendKeys("7777");
 	// click | id del boton buscar empleado
 	$driver->findElement(WebDriverBy::id("searchBtn"))->click();
-	
+	//click en el primer resultado de la busqueda por medio de xpath
 	$driver->findElement(WebDriverBy::xpath("//table/tbody/tr[1]/td[2]"))->click();
-	//$element3 = $web_driver->findElement(WebDriverBy::cssSelector('left'))->click();
+	$driver->wait()->until(
+		WebDriverExpectedCondition::urlContains('https://opensource-demo.orangehrmlive.com/index.php/pim/viewEmployee/empNumber/'));
+	echo "La URL es: '" . $driver->getCurrentURL(). "'<br>";
+	time_nanosleep(3, 3000000000);
 
 
 //--------------------------------------Editar un Usuario--------------------------------------------------------------
+	echo "<br>Este es el camino de las pruebas de editar un empleado <br>";
 	// click | id del boton Editar
 	$driver->findElement(WebDriverBy::id("btnSave"))->click();
+	time_nanosleep(3, 3000000000);
+	// type | Identificacion | 1-4444-3333
+	$driver->findElement(WebDriverBy::id("personal_txtOtherID"))->sendKeys("1-4444-3333");
+	// type | Licencia | B1
+	$driver->findElement(WebDriverBy::id("personal_txtLicenNo"))->sendKeys("B1");
+	// type | fecha de vencimiento de la licencia | B1 | 5 de agosto del 2025
+	$driver->findElement(WebDriverBy::id("personal_txtLicExpDate"))->clear();
+	$driver->findElement(WebDriverBy::id("personal_txtLicExpDate"))->sendKeys("2025-08-05");
+	// click | id del boton de genero masculino
+	$driver->findElement(WebDriverBy::id("personal_optGender_1"))->click();
+	// type | cumpleaños | 25 de abril del 2000
+	$driver->findElement(WebDriverBy::id("personal_DOB"))->clear();
+	$driver->findElement(WebDriverBy::id("personal_DOB"))->sendKeys("2000-04-25");
+	// click | id del boton salvar
+	$driver->findElement(WebDriverBy::id("btnSave"))->click();
+	echo "La URL es: '" . $driver->getCurrentURL(). "'<br>";
+	time_nanosleep(3, 3000000000);
+	
+	
+//--------------------------------------Eliminar un Usuario--------------------------------------------------------------
+	echo "<br>Este es el camino de las pruebas de eliminar un empleado <br>";
+	// click | id del boton lista de empleados
+	$driver->findElement(WebDriverBy::id("menu_pim_viewEmployeeList"))->click();
+	//Esperamos hasta confirmar la url
+	$driver->wait()->until(
+		WebDriverExpectedCondition::urlContains('https://opensource-demo.orangehrmlive.com/index.php/pim/viewEmployeeList'));
+	// Imprime el URL
+	echo "La URL es: '" . $driver->getCurrentURL(). "'<br>";
+		$driver->wait()->until(
+    WebDriverExpectedCondition::elementTextContains(WebDriverBy::id('empsearch_employee_status'), 'All'));
+	// type | Nombre del empleado | Sebastian
+	$driver->findElement(WebDriverBy::id("empsearch_employee_name_empName"))->sendKeys("Sebastian");
+	// type | Id del empleado | 7777
+	$driver->findElement(WebDriverBy::id("empsearch_id"))->sendKeys("7777");
+	// click | id del boton buscar empleado
+	$driver->findElement(WebDriverBy::id("searchBtn"))->click();
+	//click en el primer resultado de la busqueda por medio de xpath
+	$driver->findElement(WebDriverBy::xpath("//table/tbody/tr[1]/td[1]"))->click();
+	// click | id del boton eliminar
+	$driver->findElement(WebDriverBy::id("btnDelete"))->click();
+	// se confirma y listo
+	$driver->findElement(WebDriverBy::id("dialogDeleteBtn"))->click();
+	
+	
+	time_nanosleep(3, 3000000000);
+	
 	
 //--------------------------------------Salir de la página Web--------------------------------------------------------------
 	// add new cookie
